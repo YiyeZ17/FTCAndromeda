@@ -13,6 +13,8 @@ public class TestClass extends OpMode {
     private DcMotor rightFrontMotor;
     private DcMotor rightBackMotor;
 
+    private final IMUTest imu = new IMUTest();
+
     @Override
     public void init() {
 
@@ -33,6 +35,10 @@ public class TestClass extends OpMode {
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        // Initializing IMU
+
+        imu.init(hardwareMap);
+
     }
 
     @Override
@@ -46,6 +52,8 @@ public class TestClass extends OpMode {
         leftBackMotor.setPower(y);
         rightFrontMotor.setPower(y);
         rightBackMotor.setPower(y);
+
+        telemetry.addData("Heading", imu.getHeading());
 
     }
 
